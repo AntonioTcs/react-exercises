@@ -1,23 +1,28 @@
 import React from "react";
-
 export class TodoList extends React.Component {
+  state = {
+    items: ["Buy Chocolate", "Jogging", "Study"],
+  };
+
   SubmitEventHandler = (event) => {
     event.preventDefault();
 
-    const array = this.props.items;
     const newItem = event.target.elements.todoElement.value;
+    const stateArray = this.state.items;
+    stateArray.push(newItem);
 
-    array.push(newItem);
+    this.setState({
+      items: stateArray,
+    });
 
     event.target.elements.todoElement.value = "";
-    this.forceUpdate();
   };
 
   render() {
     return (
       <div>
         <ul>
-          {this.props.items.map((item, index) => (
+          {this.state.items.map((item, index) => (
             <li key={index}>{item}</li>
           ))}
         </ul>
